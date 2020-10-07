@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <title>Storno</title>
+    <style>
+      h1, h2, h3 {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body style="background-color: #fff;">
+    <div style="max-width: 600px; margin-left: auto; margin-right: auto;">
+      {% if cancelled %}
+      <h1 class="mt-5 mb-5">Erfolgreich stoniert / cancelled successfully / تم الإلغاء بنجاح</h1>
+      <p>Datum: {{ date }} - Uhrzeit: {{ time }}</p>
+      {% else %}
+      <h1>Die Reservierung existiert nicht / the reservation does not exist / الحجز غير موجود</h1>
+      {% endif %}
+      <a href="/" class="btn btn-warning mt-5 mb-5">Zurück / Back / عودة</a>
+    </div>
+  </body>
+</html>
