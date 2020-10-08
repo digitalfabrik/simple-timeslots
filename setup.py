@@ -12,9 +12,9 @@ setup(
     include_package_data=True,
     scripts=['src/manage.py'],
     data_files= [("lib/simple-timeslot-{}".format(root), [os.path.join(root, f) for f in files])
-                 for root, dirs, files in os.walk('src/vocgui/templates/')] +
+                 for root, dirs, files in os.walk('src/webgui/templates/')] +
                 [("lib/simple-timeslot-{}".format(root), [os.path.join(root, f) for f in files])
-                 for root, dirs, files in os.walk('src/vocgui/static/')] +
+                 for root, dirs, files in os.walk('src/webgui/static/')] +
                 [('usr/lib/systemd/system/', ['simple-timeslot.service'])],
     install_requires=[
         "Django>=2.2.9",
