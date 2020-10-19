@@ -35,12 +35,13 @@ def event(request, event_id):
                           ('Folgender Termin wurde gebucht / The following appointment was booked / تم حجز الموعد التالي:\n\n' +
                            str(booking_form.instance.timeslot.event.title) + '\n\n' +
                            str(booking_form.instance.timeslot.event.date) + ' ' + str(booking_form.instance.timeslot.start) +
-                           '\n\n' + booking_form.instance.timeslot.event.location),
+                           '\n\n' + booking_form.instance.timeslot.event.location + '\n\n'
+                           'Storno / Cancel / إلغاء: https://' + settings.DOMAIN + '/cancel/{{ token }}') ,
                           settings.EMAIL_HOST_USER, [booking_form.instance.contact_mail], fail_silently=not(settings.DEBUG))
     event_info = Event.objects.get(id=int(event_id))
     booking_form = BookingForm()
     booking_form.fields['timeslot'].queryset = TimeSlot.objects.filter(event=event_info,booking__isnull=True)
-    context = {"booking_form": booking_form, "event": event_info, "token": token}
+    context = {"booking_form": booking_form, "event": event_info, "token": token, "domain": settings.DOMAIN}
     return render(request, "event.html", context)
 
 def cancel(request, token):

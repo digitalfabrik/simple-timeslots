@@ -127,3 +127,5 @@ EMAIL_HOST_USER = ""
 EMAIL_HOST_PASSWORD = ""
 EMAIL_USE_SSL = False
 EMAIL_USE_TLS = True
+
+DOMAIN = "booking.tuerantuer.org"

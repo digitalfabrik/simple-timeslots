@@ -18,7 +18,7 @@
       <p class="mb-5 mt-5">Ort: {% if event.location_link %}<a href="{{ event.location_link}}">{% endif %}{{ event.location }}{% if event.location_link %}</a>{% endif %}</p>
       {% if token %}
       <h2 class="mt-5 mb-5">Erfolgreich registriert / registered successfully / سجلت بنجاح</h2>
-      <p class="mt-5 mb-5">Storno / Cancel / إلغاء: <a href="/cancel/{{ token }}">{{ request.get_host }}/cancel/{{ token }}</p>
+      <p class="mt-5 mb-5">Storno / Cancel / إلغاء: <a href="/cancel/{{ token }}">{{ domain }}/cancel/{{ token }}</a></p>
       {% else %}
       <h2 class="mt-5 mb-5">Anmeldung / Registration / التسجيل</h2>
       <form action="" method="post">
