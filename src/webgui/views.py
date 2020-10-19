@@ -30,12 +30,13 @@ def event(request, event_id):
             token = secrets.token_urlsafe(16)
             booking_form.instance.token = token
             booking_form.save()
-            send_mail('Termin gebucht / booked appointment / تم حجز الموعد',
-                      ('Folgender Termin wurde gebucht / The following appointment was booked / تم حجز الموعد التالي:\n\n' +
-                       str(booking_form.instance.timeslot.event.title) + '\n\n' +
-                       str(booking_form.instance.timeslot.event.date) + ' ' + str(booking_form.instance.timeslot.start) +
-                       '\n\n' + booking_form.instance.timeslot.event.location),
-                      settings.EMAIL_HOST_USER, [booking_form.instance.timeslot.event.manager_mail], fail_silently=not(settings.DEBUG))
+            if booking_form.instance.contact_mail:
+                send_mail('Termin gebucht / booked appointment / تم حجز الموعد',
+                          ('Folgender Termin wurde gebucht / The following appointment was booked / تم حجز الموعد التالي:\n\n' +
+                           str(booking_form.instance.timeslot.event.title) + '\n\n' +
+                           str(booking_form.instance.timeslot.event.date) + ' ' + str(booking_form.instance.timeslot.start) +
+                           '\n\n' + booking_form.instance.timeslot.event.location),
+                          settings.EMAIL_HOST_USER, [booking_form.instance.contact_mail], fail_silently=not(settings.DEBUG))
     event_info = Event.objects.get(id=int(event_id))
     booking_form = BookingForm()
     booking_form.fields['timeslot'].queryset = TimeSlot.objects.filter(event=event_info,booking__isnull=True)
@@ -55,4 +56,3 @@ def cancel(request, token):
         time = None
         date = None
     return render(request, "cancel.html", {"cancelled": cancelled, "time": time, "date": date})
-
