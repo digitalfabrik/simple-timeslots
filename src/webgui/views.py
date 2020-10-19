@@ -36,7 +36,7 @@ def event(request, event_id):
                            str(booking_form.instance.timeslot.event.title) + '\n\n' +
                            str(booking_form.instance.timeslot.event.date) + ' ' + str(booking_form.instance.timeslot.start) +
                            '\n\n' + booking_form.instance.timeslot.event.location + '\n\n'
-                           'Storno / Cancel / إلغاء: https://' + settings.DOMAIN + '/cancel/{{ token }}') ,
+                           'Storno / Cancel / إلغاء: https://' + settings.DOMAIN + '/cancel/' + booking_form.instance.token) ,
                           settings.EMAIL_HOST_USER, [booking_form.instance.contact_mail], fail_silently=not(settings.DEBUG))
     event_info = Event.objects.get(id=int(event_id))
     booking_form = BookingForm()
