@@ -38,7 +38,7 @@ class Booking(models.Model):
     token = models.CharField("Token", max_length=16, blank=True)
 
     def __str__(self):
-        return "Name: " + self.contact_name + ", Mail: " + self.contact_mail + ", Telefon: " + self.contact_phone
+        return self.timeslot.event.title + " " + str(self.timeslot.event.date) + " " + str(self.timeslot.start) + " - Name: " + self.contact_name + ", Mail: " + self.contact_mail + ", Telefon: " + self.contact_phone
 
     class Meta:
         verbose_name = "Buchung"
