@@ -59,4 +59,4 @@ def cancel_confirm(request, token):
         cancelled = False
         time = None
         date = None
-    return render(request, "cancel.html", {"cancelled": cancelled, "time": time, "date": date})
+    return render(request, "cancel_confirm.html", {"cancelled": cancelled, "time": time, "date": date})
