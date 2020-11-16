@@ -45,6 +45,9 @@ def event(request, event_id):
     return render(request, "event.html", context)
 
 def cancel(request, token):
+    return render(request, "cancel.html", {"token": token})
+
+def cancel_confirm(request, token):
     booking = Booking.objects.filter(token=token).first()
     if booking:
         time = booking.timeslot.start

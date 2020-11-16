@@ -13,10 +13,13 @@
   </head>
   <body style="background-color: #fff;">
     <div style="max-width: 600px; margin-left: auto; margin-right: auto;">
-      <p>Bitte bestätigen, dass die Buchung storniert werden soll.</p>
-      <p>Please confirm, that the reservation should be cancelled.</p>
-      <p>يرجى تأكيد وجوب إلغاء الحجز.</p>
-      <a href="/cancel/confirm/{{ token }}" class="btn btn-warning mt-5 mb-5">Buchung stornieren / Cancel reservation / إلغاء الحجز</a>
+      {% if cancelled %}
+      <h1 class="mt-5 mb-5">Erfolgreich stoniert / cancelled successfully / تم الإلغاء بنجاح</h1>
+      <p>Datum: {{ date }} - Uhrzeit: {{ time }}</p>
+      {% else %}
+      <h1>Die Reservierung existiert nicht / the reservation does not exist / الحجز غير موجود</h1>
+      {% endif %}
+      <a href="/" class="btn btn-warning mt-5 mb-5">Zurück / Back / عودة</a>
     </div>
   </body>
 </html>
