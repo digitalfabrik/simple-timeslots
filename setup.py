@@ -14,8 +14,7 @@ setup(
     data_files= [("lib/simple-timeslot-{}".format(root), [os.path.join(root, f) for f in files])
                  for root, dirs, files in os.walk('src/webgui/templates/')] +
                 [("lib/simple-timeslot-{}".format(root), [os.path.join(root, f) for f in files])
-                 for root, dirs, files in os.walk('src/webgui/static/')] +
-                [('usr/lib/systemd/system/', ['simple-timeslot.service'])],
+                 for root, dirs, files in os.walk('src/webgui/static/')],
     install_requires=[
         "Django>=2.2.9",
         "",
