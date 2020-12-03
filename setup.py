@@ -16,9 +16,7 @@ setup(
                 [("lib/simple-timeslot-{}".format(root), [os.path.join(root, f) for f in files])
                  for root, dirs, files in os.walk('src/webgui/static/')],
     install_requires=[
-        "Django>=2.2.9",
-        "",
-        ""
+        "Django>=3.1",
     ],
     extras_require={
         "dev": [
