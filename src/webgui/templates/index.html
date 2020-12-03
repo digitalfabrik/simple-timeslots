@@ -16,7 +16,9 @@
     <h1 class="mt-5 mb-5">Bitte wähle eine der Veranstaltungen</h1>
     {% if events %}
     {% for event in events %}
-    <h2 class="mt-5"><a href="/{{ event.id }}">{{ event.title }}</a></h2><p>🕑 {{ event.date }}</p></p>📍 Ort: {% if event.location_link %}<a href="{{ event.location_link}}">{% endif %}{{ event.location }}{% if event.location_link %}</a>{% endif %}</p>
+    <h2 class="mt-5"><a href="/{{ event.id }}">{{ event.title }}</a></h2>
+    <p>🕑 Datum: {{ event.date }}</p>
+    <p>📍 Ort: {% if event.location_link %}<a href="{{ event.location_link}}">{% endif %}{{ event.location }}{% if event.location_link %}</a>{% endif %}</p>
     {% endfor %}
     </ul>
     {% else %}

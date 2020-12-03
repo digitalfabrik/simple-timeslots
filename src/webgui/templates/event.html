@@ -15,7 +15,8 @@
     <div style="max-width: 600px; margin-left: auto; margin-right: auto;">
       <h1 class="mt-5 mb-5">{{ event.title }}</h1>
       {% if event.description %}<p>{{ event.description }}</p>{% endif %}
-      <p class="mb-5 mt-5">Ort: {% if event.location_link %}<a href="{{ event.location_link}}">{% endif %}{{ event.location }}{% if event.location_link %}</a>{% endif %}</p>
+      <p class="mb-2 mt-5">🕑 Datum: {{ event.date }}</p>
+      <p class="mb-5 mt-2">📍 Ort: {% if event.location_link %}<a href="{{ event.location_link}}">{% endif %}{{ event.location }}{% if event.location_link %}</a>{% endif %}</p>
       {% if token %}
       <h2 class="mt-5 mb-5">Erfolgreich registriert / registered successfully / سجلت بنجاح</h2>
       <p class="mt-5 mb-5">Storno / Cancel / إلغاء: <a href="/cancel/{{ token }}">{{ domain }}/cancel/{{ token }}</a></p>
