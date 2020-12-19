@@ -22,6 +22,7 @@ def event(request, event_id):
     """
     Display time slot form and event infos
     """
+    event_info = Event.objects.get(id=int(event_id))
     token = None
     if request.method == "POST":
         booking_form = BookingForm(request.POST)
@@ -30,15 +31,20 @@ def event(request, event_id):
             token = secrets.token_urlsafe(16)
             booking_form.instance.token = token
             booking_form.save()
+
+            recipient_list = []
             if booking_form.instance.contact_mail:
+                recipient_list.append(booking_form.instance.contact_mail)
+            if event_info.manager_mail:
+                recipient_list.append(event_info.manager_mail)
+            if recipient_list:
                 send_mail('Termin gebucht / booked appointment / تم حجز الموعد',
                           ('Folgender Termin wurde gebucht / The following appointment was booked / تم حجز الموعد التالي:\n\n' +
                            str(booking_form.instance.timeslot.event.title) + '\n\n' +
                            str(booking_form.instance.timeslot.event.date) + ' ' + str(booking_form.instance.timeslot.start) +
                            '\n\n' + booking_form.instance.timeslot.event.location + '\n\n'
                            'Storno / Cancel / إلغاء: https://' + settings.DOMAIN + '/cancel/' + booking_form.instance.token) ,
-                          settings.EMAIL_HOST_USER, [booking_form.instance.contact_mail], fail_silently=not(settings.DEBUG))
-    event_info = Event.objects.get(id=int(event_id))
+                          settings.EMAIL_HOST_USER, recipient_list, fail_silently=not(settings.DEBUG))
     booking_form = BookingForm()
     booking_form.fields['timeslot'].queryset = TimeSlot.objects.filter(event=event_info,booking__isnull=True)
     context = {"booking_form": booking_form, "event": event_info, "token": token, "domain": settings.DOMAIN}
